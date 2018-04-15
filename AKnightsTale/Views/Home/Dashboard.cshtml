@@ -1,0 +1,133 @@
+﻿@model AKnightsTale.Models.AnalysisViewModel
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<div class="title">
+    <h1>Dashboard</h1>
+</div>
+
+<div class="row" style="margin-bottom:20px">
+    <div class="col-md-3">
+        <h3 id="head">Downloads: </h3>
+    </div>
+    <div class="col-md-3">
+        <h3 id="stat">@ViewBag.Downloads</h3>
+    </div>
+    <div class="col-md-3">
+        <h3 id="head">No. of Users:</h3>
+    </div>
+    <div class="col-md-3">
+        <h3 id="stat">@ViewBag.Users</h3>
+    </div>
+</div>
+
+    <div class="row" style="margin-bottom:20px">
+        <div class="col-md-12">
+            <canvas id="mixed-chart" width="800" height="300"></canvas>
+        </div>
+    </div>
+    <div class="row" style="margin-bottom:20px">
+        <div class="col-md-6">
+            <canvas id="bar-chart" width="800" height="450"></canvas>
+        </div>
+        <div class="col-md-6">
+            <canvas id="pie-chart" width="800" height="450"></canvas>
+        </div>
+    </div>
+
+    <script>
+
+        //Mixed Chart
+        var scoreTags = new Array();
+        var array = @Html.Raw(Json.Encode(@ViewBag.Scores));
+        for(var i =0; i<array.length;i++){
+            scoreTags[i] = array[i];
+        }
+
+        var countTags = new Array();
+        var arr = @Html.Raw(Json.Encode(@ViewBag.Counts));
+        for(var i =0; i<array.length;i++){
+            countTags[i] = arr[i];
+
+        }
+
+        new Chart(document.getElementById("mixed-chart"), {
+            type: 'bar',
+            data: {
+                labels: scoreTags,
+                datasets: [{
+                    label: "Count",
+                    type: "line",
+                    borderColor: "#8e5ea2",
+                    data: countTags,
+                    fill: false
+                }, {
+                    label: "Count",
+                    type: "bar",
+                    backgroundColor: "rgba(0,0,0,0.2)",
+                    data: countTags
+                }
+                ]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                },
+                title: {
+                    display: true,
+                    text: 'Frequency of Scores'
+                },
+                legend: { display: false }
+            }
+        });
+
+        //Bar Chart
+        new Chart(document.getElementById("bar-chart"), {
+            type: 'bar',
+            data: {
+                labels: ["Checkpoint 0", "Checkpoint 1", "Checkpoint 2", "Checkpoint 3", "Checkpoint 4"],
+                datasets: [
+                    {
+                        label: "Saves",
+                        backgroundColor: ["#3e95cd", "#8e5ea2", "#3cba9f", "#e8c3b9", "#c45850"],
+                        data: [@ViewBag.Checkpoint0Count, @ViewBag.Checkpoint1Count, @ViewBag.Checkpoint2Count, @ViewBag.Checkpoint3Count, @ViewBag.Checkpoint4Count]
+                    }
+                ]
+            },
+            options: {
+                legend: { display: false },
+                title: {
+                    display: true,
+                    text: 'Most Commonly Saved Checkpoints'
+                }
+            }
+        });
+
+        //Pie Chart
+        new Chart(document.getElementById("pie-chart"), {
+            type: 'pie',
+            data: {
+                labels: ["Lives", "Coins", "Gems"],
+                datasets: [{
+                    label: "Collected",
+                    backgroundColor: ["#c40f0f", "#ffb600", "#1b5dc6"],
+                    data: [@ViewBag.Lives, @ViewBag.Coins, @ViewBag.Gems]
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'No. of Collectables Collected'
+                }
+            }
+        });
+
+    </script>

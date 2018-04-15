@@ -4,6 +4,19 @@
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: 100% 100%;
+    
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+html, body {
+    height: 100%;
+}
+
+.footer {
+    opacity: 1;
 }
 
 @font-face {
@@ -69,7 +82,7 @@
     font-family: 'Luckiest Guy';
     float: left;
     padding: 15px 15px;
-    font-size: 40px;
+    font-size: 35px;
     line-height: 20px;
 }
 
@@ -102,12 +115,12 @@
 }
 
 #sliderTab {
-    height: 450px;
+    height: 445px;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 100;
 }
 
-/* GENERAL BUTTON STYLING */
+/* Download Button Styling */
 .download-btn,
 .download-btn::after {
     -webkit-transition: all 0.3s;
@@ -125,6 +138,7 @@
     font-size: 1.6em;
     font-weight: bold;
     margin: 1em auto;
+    margin-top: 50px;
     padding: 1em 2em;
     position: relative;
     text-transform: uppercase;
@@ -164,15 +178,15 @@
 }
 
 .about{
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
-.table th {
+.sHead {
     font-family: 'Luckiest Guy';
     color: #fff;
-    font-size: 25px !important;
-    letter-spacing: 5px;
+    font-size: 25px;
     height: 50px;
+    letter-spacing: 1px;
     padding-top: 10px;
 }
 
@@ -184,12 +198,112 @@
     font-size: 50px;
 }
 
-.two {
+.two, h4 {
     font-family: 'Luckiest Guy';
     color: #fff;
     font-size: 30px;
 }
 
-.gsHeaders{
-    font-size:100px;
+#loginForm, #registerForm {
+    background-color: white;
+    border-radius: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 20px;
+}
+
+#loginForm {
+    background-color: white;
+    border-radius: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 20px;
+}
+
+h2 {
+    font-family: 'Luckiest Guy';
+    background: -webkit-linear-gradient(#ff9900, #ffcc00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 50px;
+    margin-top:50px;
+}
+
+#head {
+    font-family: 'Luckiest Guy';
+    background: -webkit-linear-gradient(#ff9900, #ffcc00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 40px;
+    margin-top: 50px;
+}
+
+#stat {
+    font-family: 'Luckiest Guy';
+    color: #fff;
+    font-size: 40px;
+    margin-top: 50px;
+}
+
+canvas {
+    background-color: white;
+    border-radius: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-top: 20px;
+}
+
+#downloadHead {
+    color: #fff !important;
+}
+
+.gsHeader {
+    font-family: 'Luckiest Guy';
+    color: #fff;
+    font-size: 1.6em;
+    height: 50px;
+    letter-spacing:0.5px;
+    padding-top: 10px;
+}
+
+.gsBody {
+    font-family: 'Luckiest Guy';
+    color: #fff;
+    font-size: 30px;
+}
+
+@media only screen and (max-width: 600px) {
+    .title h1 {
+        font-size: 45px;
+    }
+
+    .sHead {
+        font-size: 20px;
+    }
+
+    .one{
+        font-size: 20px;
+    }
+
+    .two {
+        font-size: 15px;
+    }
+
+    .gsHeader {
+        font-size: .5em;
+    }
+
+    .button-text {
+        display: none;
+    }
+
+    .gsBody {
+        font-size: .6em;
+    }
 }

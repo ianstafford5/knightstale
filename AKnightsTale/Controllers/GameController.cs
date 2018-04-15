@@ -34,6 +34,7 @@ namespace AKnightsTale.Controllers
                 }
                 catch (Exception e)
                 {
+                    Debug.WriteLine(e.ToString());
                     return NotFound();
                 }
             }
@@ -50,32 +51,33 @@ namespace AKnightsTale.Controllers
             {
                 var userManager = Request.GetOwinContext().GetUserManager<ApplicationUserManager>(); ;
                 user = await userManager.FindByNameAsync(model.Email);
-            }
 
-            if (user == null)
-            {
-                using (ApplicationDbContext context = new ApplicationDbContext())
+                if (user == null)
                 {
-                    try
+                    using (ApplicationDbContext context = new ApplicationDbContext())
                     {
-                        var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-                        var newUser = new ApplicationUser() { Email = model.Email, UserName = model.Email };
-
-                        Debug.WriteLine("**************************Model Valid****************************");
-
-                        var createUser = UserManager.Create(newUser, model.Password);
-
-                        if (createUser.Succeeded)
+                        try
                         {
-                            Debug.WriteLine("**************************SUCCESS!!!****************************");
-                            HttpResponseMessage okResponse = Request.CreateResponse(HttpStatusCode.OK);
-                            return okResponse;
+                            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                            var newUser = new ApplicationUser() { Email = model.Email, UserName = model.Email };
+
+                            Debug.WriteLine("**************************Model Valid****************************");
+
+                            var createUser = UserManager.Create(newUser, model.Password);
+
+                            if (createUser.Succeeded)
+                            {
+                                Debug.WriteLine("**************************SUCCESS!!!****************************");
+                                HttpResponseMessage okResponse = Request.CreateResponse(HttpStatusCode.OK);
+                                return okResponse;
+                            }
                         }
-                    }
-                    catch (Exception e)
-                    {
-                        HttpResponseMessage badRequest = Request.CreateResponse(HttpStatusCode.BadRequest);
-                        return badRequest;
+                        catch (Exception e)
+                        {
+                            Debug.WriteLine(e.ToString());
+                            HttpResponseMessage badRequest = Request.CreateResponse(HttpStatusCode.BadRequest);
+                            return badRequest;
+                        }
                     }
                 }
             }
@@ -151,7 +153,7 @@ namespace AKnightsTale.Controllers
                 try
                 {
                     var userManager = Request.GetOwinContext().GetUserManager<ApplicationUserManager>(); ;
-                    var user = await userManager.FindAsync(model.Email, model.Password);
+                    var user = await userManager.FindAsync(model.Username, model.Password);
 
                     if (user == null)
                     {
@@ -162,7 +164,7 @@ namespace AKnightsTale.Controllers
                 }
                 catch (Exception e)
                 {
-                    return BadRequest();
+                    return BadRequest(e.ToString());
                 }
             }
         }
@@ -214,7 +216,10 @@ namespace AKnightsTale.Controllers
                         if (user != null)
                         {
                             var sc = db.Scores.Where(s => s.Username == user).Max(s => s.Score);
-                            return Ok(sc);
+                            if (sc != 0)
+                            {
+                                return Ok(sc);
+                            }
                         }
                         return BadRequest();
                     }
@@ -284,29 +289,29 @@ namespace AKnightsTale.Controllers
         }
 
 
-        [HttpDelete]
-        [Route("gamestate")]
-        public IHttpActionResult DeleteGameState(DeleteGameStateForm delete)
-        {
-            using (ApplicationDbContext db = new ApplicationDbContext())
-            {
-                try
-                {
-                    if (ModelState.IsValid)
-                    {
-                        var oldestGameState = db.GameStates.Where(g => g.ID == delete.ID).First();
-                        db.GameStates.Remove(oldestGameState);
-                        db.SaveChanges();
-                        return Ok();
-                    }
-                    return BadRequest();
-                }
-                catch (Exception e)
-                {
-                    return BadRequest(e.ToString());
-                }
-            }
-        }
+        //[HttpDelete]
+        //[Route("gamestate")]
+        //public IHttpActionResult DeleteGameState(DeleteGameStateForm delete)
+        //{
+        //    using (ApplicationDbContext db = new ApplicationDbContext())
+        //    {
+        //        try
+        //        {
+        //            if (ModelState.IsValid)
+        //            {
+        //                var oldestGameState = db.GameStates.Where(g => g.ID == delete.ID).First();
+        //                db.GameStates.Remove(oldestGameState);
+        //                db.SaveChanges();
+        //                return Ok();
+        //            }
+        //            return BadRequest();
+        //        }
+        //        catch (Exception e)
+        //        {
+        //            return BadRequest(e.ToString());
+        //        }
+        //    }
+        //}
 
     }
 }

@@ -24,18 +24,25 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Leaderboard", "Leaderboard", "Home")</li>
-                    <li>
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            Player Stats
-                            <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li>@Html.ActionLink("My Scores", "MyScores", "Home")</li>
-                            <li>@Html.ActionLink("Game States", "GameStates", "Home")</li>
-                        </ul>
-                    </li>
+                    @if (ViewContext.HttpContext.User.IsInRole("Admin"))
+                    {
+                        <li>@Html.ActionLink("Dashboard", "Dashboard", "Home")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Leaderboard", "Leaderboard", "Home")</li>
+                        <li>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                Player Stats
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li>@Html.ActionLink("My Scores", "MyScores", "Home")</li>
+                                <li>@Html.ActionLink("Game States", "GameStates", "Home")</li>
+                            </ul>
+                        </li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

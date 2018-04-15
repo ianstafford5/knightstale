@@ -25,4 +25,5 @@ $('#myCarousel').on('slid.bs.carousel', function (e) {
     id = parseInt(id);
     $('[id^=carousel-selector-]').removeClass('selected');
     $('[id=carousel-selector-' + id + ']').addClass('selected');
+    Date.now.
 });

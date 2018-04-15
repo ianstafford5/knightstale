@@ -65,4 +65,14 @@ namespace AKnightsTale.Models
     {
         public int ID;
     }
+
+    public class AnalysisViewModel
+    {
+        public int Checkpoint0Count { get; set; }
+        public int Checkpoint1Count { get; set; }
+        public int Checkpoint2Count { get; set; }
+        public int Checkpoint3Count { get; set; }
+        public int Checkpoint4Count { get; set; }
+        public int Downloads { get; set; }
+    }
 }
