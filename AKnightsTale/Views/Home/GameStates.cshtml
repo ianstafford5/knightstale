@@ -1,0 +1,116 @@
+﻿@model IEnumerable<AKnightsTale.Models.GameStateModel>
+@{
+    ViewBag.Title = "Game States";
+}
+
+<div class="title">
+    <h1>GAME STATES</h1>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            Date
+        </th>
+        <th>
+            <div class="two">
+                Time
+            </div> 
+        </th>
+        <th>
+            <div class="gsHeader">
+                Lives
+            </div>
+        </th>
+        <th>
+            <div class="gsHeader">
+                Gems
+            </div>
+        </th>
+        <th>
+            <div class="gsHeader">
+                Coins
+            </div>
+        </th>
+        <th>
+            <div class="gsHeader">
+                Time
+            </div>       
+        </th>
+        <th>
+        </th>
+    </tr>
+
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <div class="two">
+                    @Html.DisplayFor(modelItem => item.DateTime)
+                </div>
+            </td>
+            <td>
+                <div class="two">
+                    @Html.DisplayFor(modelItem => item.Checkpoint)
+                </div>
+            </td>
+            <td>
+                <div class="two">
+                    @Html.DisplayFor(modelItem => item.Lives)
+                </div>
+            </td>
+            <td>
+                <div class="two">                    
+                    @Html.DisplayFor(modelItem => item.GemCount)
+                </div>
+            </td>
+            <td>
+                <div class="two">
+                    @Html.DisplayFor(modelItem => item.CoinCount)
+                </div>
+            </td>
+            <td>
+                <div class="two">
+                    @{
+                        var hours = Math.Floor((@item.Time % 216000) / 3600).ToString("00");
+                        var minutes = Math.Floor((@item.Time % 3600) / 60).ToString("00");
+                        var seconds = (@item.Time % 60).ToString("00");
+                        var timer = hours + ":" + minutes + ":" + seconds;
+                    }
+                    @timer
+                </div>
+            </td>
+            <td>
+                <button  class="btn btn-danger" value="DELETE" onclick=GetConfirmation(@item.ID)>Delete <i class="fas fa-trash-alt"></i></button>          
+            </td>
+        </tr>
+    }
+</table>
+
+<script type="text/javascript">
+    function GetConfirmation(id) {
+        var reply = confirm("Ary you sure you want to delete this?");
+        if (reply) {
+            $.ajax({
+                url: '@Url.Action("DeleteGameState", "Home")',
+                data: { id: id }
+            }).done(function () {
+                alert('Game State was successfully deleted!');
+            });
+        }
+        else {
+            return;
+        }
+    }
+
+    function ConvertTime(time) {
+
+        var hours = Math.floor((time % 216000) / 3600).ToString("00");
+        var minutes = Math.floor((time % 3600) / 60).ToString("00");
+        var seconds = (time % 60).ToString("00");
+        var timer = hours + ":" + minutes + ":" + seconds;
+
+        return timer;
+    }
+</script>

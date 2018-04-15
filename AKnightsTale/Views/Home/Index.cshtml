@@ -1,0 +1,61 @@
+﻿@{
+    var rank = 0;
+    ViewBag.Title = "Home Page";
+}
+
+<div class="title">
+    <h1>Download Now!</h1>
+</div>
+
+<!-- thumb navigation carousel -->
+
+<!--/main slider carousel-->
+<nav>
+    <ul class="pager">
+        <li class="previous"><a href="#myCarousel" data-slide="prev">‹ Prev</a></li>
+        <li class="next"><a href="#myCarousel" data-slide="next">Next ›</a></li>
+    </ul>
+</nav>
+<!-- main slider carousel -->
+<div class="row" style="margin-bottom:20px">
+    <div class="col-md-8" id="slider">
+        <div id="myCarousel" class="carousel slide">
+            <!-- main slider carousel items -->
+            <div class="carousel-inner">
+                <div class="active item" data-slide-number="0"><div class="center-block">
+                        <span><img src="~/Images/poly1.jpg" class="center-block img-responsive"></span>
+                    </div>
+
+                </div>
+                <div class="item" data-slide-number="1">
+                    <img src="~/Images/poly2.jpg" class="img-responsive">
+                </div>
+                <div class="item" data-slide-number="2">
+                    <img src="~/Images/poly3.jpg" class="img-responsive">
+                </div>
+                <div class="item" data-slide-number="3">
+                    <img src="~/Images/poly4.jpg" class="img-responsive">
+                </div>
+                <div class="item" data-slide-number="4">
+                    <img src="~/Images/poly5.jpg" class="img-responsive">
+                </div>
+                <div class="item" data-slide-number="5">
+                    <img src="~/Images/poly1.jpg" class="img-responsive">
+                </div>
+            </div>
+            <!-- main slider carousel nav controls -->
+            <!--  -->
+        </div>
+    </div>
+    <div class="col-md-4" id="sliderTab">
+        <div class="container">
+            <div class="about">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
+            </div>
+            <button class="download-btn">Download <i class="fas fa-download"></i></button>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,195 @@
+﻿body {
+    background: url(../images/bg.png) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: 100% 100%;
+}
+
+@font-face {
+    font-family: "Luckiest Guy";
+    src: url("/fonts/luckiestguy.ttf");
+}
+
+.title h1 {
+    font-family: 'Luckiest Guy';
+    font-size: 72px;
+    text-align: center;
+    background: -webkit-linear-gradient(#ff9900, #ffcc00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 50px;
+}
+
+.title {
+    margin-top: 50px;
+}
+
+.selected img {
+    opacity: 0.5;
+}
+
+.boxtitle {
+    padding: 10px;
+    border: 0;
+    margin: 10px 0 5px;
+    font-size: 17px;
+    background: #ddd;
+    width: 100%;
+    min-height: 40px;
+}
+
+
+.navbar {
+    margin-bottom: 0;
+    background-color: #2d2d30;
+    border: 0;
+    font-size:14px;
+    height: 50px;
+    padding-top: 10px;
+}
+
+.navbar-collapse {
+    background-color: #2d2d30;
+}
+
+.navbar-collapse li {
+    background-color: #2d2d30;
+    text-align:center;
+    border-bottom: solid 1px;
+}
+
+.dropdown-menu {
+    background-color: #2d2d30;
+    text-align: center;
+    border-bottom: solid 1px;
+}
+
+.navbar-brand {
+    font-family: 'Luckiest Guy';
+    float: left;
+    padding: 15px 15px;
+    font-size: 40px;
+    line-height: 20px;
+}
+
+    .navbar-brand
+    {
+        background: -webkit-linear-gradient(#ff9900, #ffcc00);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }  
+
+.navbar li a, .navbar .navbar-brand {
+    color: #d5d5d5 !important;
+}
+
+.navbar {
+    min-height: 70px !important
+}
+
+.navbar-nav li a:hover {
+    color: white !important;
+}
+
+.navbar-nav li.active a {
+    color: #fff !important;
+    background-color: #5e5e5e !important;
+}
+
+.navbar-default .navbar-toggle {
+    border-color: transparent;
+}
+
+#sliderTab {
+    height: 450px;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
+}
+
+/* GENERAL BUTTON STYLING */
+.download-btn,
+.download-btn::after {
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.download-btn {
+    background: none;
+    border: 3px solid #fff;
+    border-radius: 5px;
+    color: #fff;
+    display: block;
+    font-size: 1.6em;
+    font-weight: bold;
+    margin: 1em auto;
+    padding: 1em 2em;
+    position: relative;
+    text-transform: uppercase;
+}
+
+.download-btn::before,
+.download-btn::after {
+    background: -webkit-linear-gradient(#ff9900, #ffcc00);
+    content: '';
+    position: absolute;
+    z-index: -1;
+}
+
+.download-btn:hover {
+    color: black;
+}
+
+
+/* BUTTON 3 */
+.download-btn::after {
+    height: 0;
+    left: 50%;
+    top: 50%;
+    width: 0;
+}
+
+.download-btn:hover:after {
+    height: 100%;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+
+.about p{
+    color: #fff;
+    font-size: 20px;
+}
+
+.about{
+    margin-top: 10px;
+}
+
+.table th {
+    font-family: 'Luckiest Guy';
+    color: #fff;
+    font-size: 25px !important;
+    letter-spacing: 5px;
+    height: 50px;
+    padding-top: 10px;
+}
+
+.one {
+    font-family: 'Luckiest Guy';
+    background: -webkit-linear-gradient(#ff9900, #ffcc00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 50px;
+}
+
+.two {
+    font-family: 'Luckiest Guy';
+    color: #fff;
+    font-size: 30px;
+}
+
+.gsHeaders{
+    font-size:100px;
+}

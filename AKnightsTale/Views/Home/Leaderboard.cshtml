@@ -1,0 +1,59 @@
+﻿
+@model IEnumerable<AKnightsTale.Models.ScoreModel>
+
+@{
+    ViewBag.Title = "Leaderboard";
+    var rank = 0;
+    string num = "";
+}
+
+
+<div class="title">
+    <h1>Leaderboard</h1>
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            RANK
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Score)
+        </th>
+        <th></th>
+    </tr>
+    
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>
+                @if (++rank < 2)
+                {
+                    num = "one";
+                }
+                else
+                {
+                    num = "two";
+                }
+                <div class=@num>
+                    @(rank)
+                </div>
+            </th>
+            <td>
+                <div class=@num>
+                    @Html.DisplayFor(modelItem => item.Username)
+                </div>                
+            </td>
+            <td>
+                <div class=@num>
+                    @Html.DisplayFor(modelItem => item.Score)
+                </div>
+            </td>
+        </tr>
+    }
+
+</table>
