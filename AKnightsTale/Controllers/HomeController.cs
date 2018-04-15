@@ -76,13 +76,13 @@ namespace AKnightsTale.Controllers
             return View(model);
         }
 
-        //public FileResult Download()
-        //{
-        //    downloads++;
-        //    Debug.WriteLine(downloads);
-        //    var FileVirtualPath = "~/App_Data/uploads/AKnightsTale.zip";
-        //    return File(FileVirtualPath, "application/force-download", Path.GetFileName(FileVirtualPath));
-        //}
+        public FileResult Download()
+        {
+            downloads++;
+            Debug.WriteLine(downloads);
+            var FileVirtualPath = "~/App_Data/uploads/AKnightsTale.zip";
+            return File(FileVirtualPath, "application/force-download", Path.GetFileName(FileVirtualPath));
+        }
 
         [Authorize(Roles ="Admin")]
         public ActionResult Dashboard()

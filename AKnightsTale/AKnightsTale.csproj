@@ -259,6 +259,7 @@
     <Content Include="fonts\luckiestguy.ttf" />
     <Content Include="fonts\luckiestguy.eot" />
     <Content Include="fonts\luckiestguy.otf" />
+    <Content Include="App_Data\uploads\AKnightsTale.zip" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -306,9 +307,7 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Home\MyScores.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
   </ItemGroup>
