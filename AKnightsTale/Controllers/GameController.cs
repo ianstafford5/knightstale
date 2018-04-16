@@ -40,48 +40,10 @@ namespace AKnightsTale.Controllers
             }
         }
 
-        [Route("register")]
         [HttpPost]
-        public async System.Threading.Tasks.Task<HttpResponseMessage> Register(RegisterViewModel model)
+        [Route("register")]
+        public HttpResponseMessage RegisterAsync(RegisterViewModel model)
         {
-
-            ApplicationUser user = null;
-
-            if (ModelState.IsValid)
-            {
-                var userManager = Request.GetOwinContext().GetUserManager<ApplicationUserManager>(); ;
-                user = await userManager.FindByNameAsync(model.Email);
-
-                if (user == null)
-                {
-                    using (ApplicationDbContext context = new ApplicationDbContext())
-                    {
-                        try
-                        {
-                            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
-                            var newUser = new ApplicationUser() { Email = model.Email, UserName = model.Email };
-
-                            Debug.WriteLine("**************************Model Valid****************************");
-
-                            var createUser = UserManager.Create(newUser, model.Password);
-
-                            if (createUser.Succeeded)
-                            {
-                                Debug.WriteLine("**************************SUCCESS!!!****************************");
-                                HttpResponseMessage okResponse = Request.CreateResponse(HttpStatusCode.OK);
-                                return okResponse;
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            Debug.WriteLine(e.ToString());
-                            HttpResponseMessage badRequest = Request.CreateResponse(HttpStatusCode.BadRequest);
-                            return badRequest;
-                        }
-                    }
-                }
-            }
-
             var modelStateList = ModelState.ToDictionary(
                     kvp => kvp.Key,
                     kvp => kvp.Value.Errors.Select(e => e.ErrorMessage).ToArray()
@@ -98,16 +60,39 @@ namespace AKnightsTale.Controllers
                     string key = kvp.Key.Substring(i);
                     Debug.WriteLine(key);
                     errorList.Add(key, kvp.Value[0]);
+                    //modelStateList.Remove(kvp.Key);
                 }
                 Debug.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value[0]);
             }
 
-            if (user != null)
+            ApplicationUser userEmail = null;
+            ApplicationUser username = null;
+
+            if (ModelState.IsValid)
             {
-                errorList.Remove("model.Email");
-                errorList.Add("Email", "Email '" + model.Email + "' is already taken.");
+                var userManager = Request.GetOwinContext().GetUserManager<ApplicationUserManager>();
+                userEmail = userManager.FindByEmail(model.Email);
+                username = userManager.FindByName(model.Username);
             }
 
+            if (!errorList.ContainsKey("Email"))
+            {
+                if (userEmail != null)
+                {
+                    errorList.Add("Email", "Email is already taken!");
+                }
+            }
+            
+
+            if (!errorList.ContainsKey("Username"))
+            {
+                if (username != null)
+                {
+                    errorList.Add("Username", "Username is already taken!");
+                }
+            }
+
+            //var errors = new ScoresController().MyDictionaryToJson(errorList);
             if (!errorList.ContainsKey("Password"))
             {
                 bool containsInt = model.Password.Any(char.IsDigit);
@@ -133,12 +118,25 @@ namespace AKnightsTale.Controllers
                 }
             }
 
-            //bool containsInt = model.Password.Any(char.IsDigit);
-            //if (!containsInt)
-            //{
-            //    errorList.Remove("Password");
-            //    errorList.Add("Password", "Passwords must have at least one digit ('0'-'9').");
-            //}
+            if (errorList.Count <= 0)
+            {
+                ApplicationDbContext context = new ApplicationDbContext();
+                var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                var newUser = new ApplicationUser() { Email = model.Email, UserName = model.Username };
+
+                Debug.WriteLine("**************************Model Valid****************************");
+                //Debug.WriteLine("Name: " + model.Email + "\nPassword: " + model.Password);
+                var createUser = UserManager.Create(newUser, model.Password);
+
+                if (createUser.Succeeded)
+                {
+                    Debug.WriteLine("**************************SUCCESS!!!****************************");
+                    HttpResponseMessage okResponse = Request.CreateResponse(HttpStatusCode.OK);
+                    return okResponse;
+                }
+
+
+            }
 
             HttpResponseMessage response = Request.CreateResponse(HttpStatusCode.BadRequest, errorList);
             return response;
