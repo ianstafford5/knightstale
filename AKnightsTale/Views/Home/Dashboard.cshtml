@@ -89,6 +89,8 @@
             }
         });
 
+
+
         //Bar Chart
         new Chart(document.getElementById("bar-chart"), {
             type: 'bar',
@@ -103,6 +105,13 @@
                 ]
             },
             options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                },
                 legend: { display: false },
                 title: {
                     display: true,
